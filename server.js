@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
-
+const bodyParser = require('body-parser');
+const cors = require('cors');
 module.exports = app;
 
 /* Do not change the following line! It is required for testing and allowing
@@ -8,6 +9,9 @@ module.exports = app;
 */
 const PORT = process.env.PORT || 4001;
 
+app.listen(PORT, () => {
+  console.log(`Server is listening on PORT ${PORT}`)
+})
 // Add middleware for handling CORS requests from index.html
 
 
@@ -16,6 +20,7 @@ const PORT = process.env.PORT || 4001;
 
 // Mount your existing apiRouter below at the '/api' path.
 const apiRouter = require('./server/api');
+const { Parser } = require('webpack');
 
 
 // This conditional is here for testing purposes:
