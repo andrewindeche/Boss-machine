@@ -8,10 +8,6 @@ module.exports = app;
 *  the frontend application to interact as planned with the api server
 */
 const PORT = process.env.PORT || 4001;
-
-app.listen(PORT, () => {
-  console.log(`Server is listening on PORT ${PORT}`)
-})
 // Add middleware for handling CORS requests from index.html
 
 
@@ -20,7 +16,14 @@ app.listen(PORT, () => {
 
 // Mount your existing apiRouter below at the '/api' path.
 const apiRouter = require('./server/api');
+const ideaRouter = require('./server/api');
+const meetingsRouter = require('./server/api');
 const { Parser } = require('webpack');
+
+app.use(bodyParser.json());
+app.use('/api/minions', apiRouter);
+app.use('/api/ideas', ideaRouter);
+app.use('/api/meetings', meetingsRouter);
 
 
 // This conditional is here for testing purposes:
@@ -28,3 +31,7 @@ if (!module.parent) {
   // Add your code to start the server listening at PORT below:
 
 }
+
+app.listen(PORT, () => {
+  console.log(`Server is listening on PORT ${PORT}`)
+})
