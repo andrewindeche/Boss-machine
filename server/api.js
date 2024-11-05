@@ -59,10 +59,10 @@ apiRouter.put('/:id',(req,res) => {
     isUpdated ? res.status(201).send(updatedMinion): res.status(500).send("not updated");
 });
 
-apiRouter.delete('/:id',(req,res) => {
- const deleteMinion = deleteFromDatabasebyId('minions',req.minion.id);
+apiRouter.delete('/ideas',(req,res,id) => {
+ const deleteMinion = deleteFromDatabasebyId('minions',id);
     deleteMinion 
-        ?(res.status(204).send("Deleted"))
+        ?(res.status(204).send("No content"))
         :(res.status(500).send("Failed to delete"));
 });
 
@@ -76,7 +76,7 @@ ideaRouter.post('/ideas',checkMillionDollarIdea,(req,res) => {
     newIdea ? res.status(201).send(newIdea): res.status(400).send('Error')
 });
 
-ideaRouter.get('/id',(req,res) => {
+ideaRouter.get('/ideas/:ideaId',(req,res) => {
     const getIdeaById = getFromDatabaseById('idea',req.idea.id);
     getIdeaById ? res.status(200).send(req.idea) : res.status(500).send()
 });

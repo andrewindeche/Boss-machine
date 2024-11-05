@@ -12,7 +12,7 @@ const checkMillionDollarIdea = (req, res, next) => {
     // Check if the total value is at least one million dollars
     if (totalValue >= 1000000) {
       next();
-    } else {
+    } else if (totalValue < 1000000) {
       res.status(400).send('Idea must be worth at least one million dollars');
     }
   };
